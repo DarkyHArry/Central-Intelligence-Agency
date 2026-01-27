@@ -9,13 +9,13 @@ namespace CIA.HelpDesk.Models
         public Categoria Categoria { get; set; }
         public string Status { get; set; } = "Aberto";
         public Cliente Solicitante { get; set; }
-        public string Endereco { get; set; } // Novo campo para armazenar endereço do incidente
+        public string Endereco { get; set; } // Armazenar endereço do incidente
         public Tecnico? AgenteResponsavel { get; set; }
 
         // Composição: histórico faz parte do chamado
         public List<HistoricoChamado> Historicos { get; set; } = new List<HistoricoChamado>();
 
-        // Parameterless constructor required for JSON deserialization
+        
         public Chamado() { }
 
         public Chamado(int id, string descricao, Cliente solicitante, Categoria categoria = Categoria.Geral, string endereco = "")
@@ -43,4 +43,5 @@ namespace CIA.HelpDesk.Models
 
         public bool EstaEncerrado => Status == "Encerrado";
     }
+
 }
