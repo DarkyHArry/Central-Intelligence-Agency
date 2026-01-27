@@ -1,0 +1,154 @@
+[
+  {
+    "Id": 1,
+    "Descricao": "um homem armado est\u00E1 tentando invadir a minha casa, preciso de ajuda",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 1,
+      "Nome": "Esmael Victor Renovato Da Silva",
+      "Tipo": null,
+      "TipoSetor": "Civil",
+      "Documento": null,
+      "DocumentoIdentificacao": "13994343496",
+      "Endereco": null
+    },
+    "Endereco": null,
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  },
+  {
+    "Id": 2,
+    "Descricao": "uma crian\u00E7a acaba de ser sequestrada, precisamos de ajuda!",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 1,
+      "Nome": "Esmael Victor Renovato Da Silva",
+      "Tipo": null,
+      "TipoSetor": "Civil",
+      "Documento": null,
+      "DocumentoIdentificacao": "13994343496",
+      "Endereco": null
+    },
+    "Endereco": null,
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  },
+  {
+    "Id": 3,
+    "Descricao": "criminoso em minha resid\u00EAncia",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 2,
+      "Nome": "Esmael Victore Renovato Da Silva",
+      "Tipo": null,
+      "TipoSetor": "Civil",
+      "Documento": null,
+      "DocumentoIdentificacao": "13994343496",
+      "Endereco": null
+    },
+    "Endereco": null,
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  },
+  {
+    "Id": 4,
+    "Descricao": "um assassinato a minha frente em um estabelecimento",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 3,
+      "Nome": "Johny Rodrigues De Ass\u00EDs",
+      "Tipo": null,
+      "TipoSetor": "Civil",
+      "Documento": null,
+      "DocumentoIdentificacao": "03045597319",
+      "Endereco": null
+    },
+    "Endereco": null,
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  },
+  {
+    "Id": 5,
+    "Descricao": "um incidente com uma crian\u00E7a baleada na rua em los angeles",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 4,
+      "Nome": "Steve Rogers Rodrigues",
+      "Tipo": null,
+      "TipoSetor": "Civil",
+      "Documento": null,
+      "DocumentoIdentificacao": "10993456721",
+      "Endereco": null
+    },
+    "Endereco": null,
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  },
+  {
+    "Id": 6,
+    "Descricao": "Socorro um homem est\u00E1 rodeando minha residencia",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 5,
+      "Nome": "Mariana Steven Rogers",
+      "Tipo": null,
+      "TipoSetor": "Civil",
+      "Documento": null,
+      "DocumentoIdentificacao": "10324512134",
+      "Endereco": null
+    },
+    "Endereco": null,
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  },
+  {
+    "Id": 7,
+    "Descricao": "Um assassinato em minha residencia, dois homens invadiram minha casa",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 6,
+      "Nome": "Kimberly Stuartt Vergara",
+      "Tipo": null,
+      "TipoSetor": "Civil",
+      "Documento": null,
+      "DocumentoIdentificacao": "12334501002",
+      "Endereco": null
+    },
+    "Endereco": null,
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  },
+  {
+    "Id": 8,
+    "Descricao": "Um homem negro assassinou uma mulher",
+    "Categoria": 1,
+    "Status": "Aberto",
+    "Solicitante": {
+      "Id": 7,
+      "Nome": "Gabriel Martins",
+      "Tipo": "Civil",
+      "TipoSetor": "Civil",
+      "Documento": "12345678910",
+      "DocumentoIdentificacao": "12345678910",
+      "Endereco": "Rua Doutor Sebasti\u00E3o 13"
+    },
+    "Endereco": "Rua Doutor Sebasti\u00E3o 13",
+    "AgenteResponsavel": null,
+    "Historicos": [],
+    "EstaEncerrado": false
+  }
+]
