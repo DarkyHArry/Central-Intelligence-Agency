@@ -11,7 +11,7 @@ namespace CIA.HelpDesk.Models
         public string DocumentoIdentificacao { get; set; } // Compatibilidade com dados antigos
         public string Endereco { get; set; } // Campo para armazenar endereço
 
-        // Parameterless constructor required for JSON deserialization
+        
         public Cliente() { }
 
         public Cliente(int id, string nome, string tipo, string documento, string endereco = "")
@@ -25,4 +25,5 @@ namespace CIA.HelpDesk.Models
             Endereco = endereco ?? "";
         }
     }
+
 }
