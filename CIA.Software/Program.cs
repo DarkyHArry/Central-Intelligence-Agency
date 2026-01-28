@@ -7,24 +7,38 @@ using System.Runtime.InteropServices;
 using CIA.HelpDesk.Models;
 using CIA.HelpDesk.Services;
 using CIA.HelpDesk.Storage;
+using CIA.HelpDesk.Utils;
 
 var persistence = new PersistenceService();
 var repo = new InMemoryChamadoRepository(persistence);
 var service = new ChamadoService(repo);
-var central = persistence.LoadCentral();
+var criminosos = persistence.LoadCriminosos();
+var operacoes = persistence.LoadOperacoes();
+var supports = persistence.LoadSupports();
 
 // Gera um código administrativo único simples para oficiais
 var adminCode = GenerateAdminCode();
 
-Console.WriteLine("CIA Deskopt Emergency");
-Console.WriteLine("Você é: 1) Oficial  2) Civil");
+ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════════");
+ColorConsole.PrintMenu("                   CIA DESKOPT EMERGENCY                       ");
+ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════════");
+Console.WriteLine();
+ColorConsole.WriteMenu("Você é: ");
+ColorConsole.WriteCorporation("1) Oficial");
+Console.Write("  ");
+ColorConsole.WriteCivil("2) Civil");
+Console.WriteLine();
 var role = Console.ReadLine();
 
 if (role == "2")
 {
-	Console.Write("Seu Nome completo: ");
+	ColorConsole.PrintCivil("╔════════════════════════════════════════════════════════════╗");
+	ColorConsole.PrintCivil("║              SISTEMA DE ATENDIMENTO AO CIVIL               ║");
+	ColorConsole.PrintCivil("╚════════════════════════════════════════════════════════════╝");
+	Console.WriteLine();
+	ColorConsole.WriteCivil("Seu Nome completo: ");
 	var nome = Console.ReadLine() ?? string.Empty;
-	if (!IsValidName(nome)) { Console.WriteLine("Nome inválido. Use apenas letras e espaços."); return; }
+	if (!IsValidName(nome)) { ColorConsole.PrintError("Nome inválido. Use apenas letras e espaços."); return; }
 
 	// Busca por nome existente (persistente)
 	var clients = persistence.LoadClients();
@@ -32,22 +46,22 @@ if (role == "2")
 
 	if (cliente == null)
 	{
-		Console.Write("Documento (somente números - CPF 11 dígitos): ");
+		ColorConsole.WriteCivil("Documento (somente números - CPF 11 dígitos): ");
 		var documento = Console.ReadLine() ?? string.Empty;
-		if (!IsValidDocument(documento)) { Console.WriteLine("Documento inválido. Deve ser número com 11 dígitos."); return; }
+		if (!IsValidDocument(documento)) { ColorConsole.PrintError("Documento inválido. Deve ser número com 11 dígitos."); return; }
 		
-		Console.Write("Sua Localização: : ");
+		ColorConsole.WriteCivil("Sua Localização: ");
 		var endereco = Console.ReadLine() ?? string.Empty;
 		
 		cliente = new Cliente(clients.Count + 1, nome, "Civil", documento, endereco);
 		clients.Add(cliente);
 		persistence.SaveClients(clients);
-		Console.WriteLine("Cadastro criado e salvo.");
+		ColorConsole.PrintSuccess("✓ Cadastro criado e salvo.");
 	}
 	else
 	{
 		// Atualiza endereço se for um cliente existente
-		Console.Write("Endereço do incidente: ");
+		ColorConsole.WriteCivil("Endereço do incidente: ");
 		var endereco = Console.ReadLine() ?? string.Empty;
 		if (!string.IsNullOrEmpty(endereco))
 		{
@@ -56,84 +70,138 @@ if (role == "2")
 		}
 	}
 
-	Console.Write("Descreva o incidente: ");
+	ColorConsole.WriteCivil("Descreva o incidente: ");
 	var descricao = Console.ReadLine() ?? string.Empty;
 	var unidade = AnalyzeIncident(descricao);
-	Console.WriteLine($"Detectado envio para: {unidade}");
+	ColorConsole.PrintInfo($"➜ Detectado envio para: {unidade}");
 
 	service.CriarChamado(descricao, cliente, Categoria.Segurança, cliente.Endereco);
 	persistence.SaveChamados(service.ListarChamados());
-	Console.WriteLine("Chamado criado e registrado.");
+	ColorConsole.PrintSuccess("✓ Chamado criado e registrado.");
 
 	// Tocar áudio (apenas para civil) — tenta arquivo específico por unidade
 	PlayAlertForUnit(unidade);
 
-	// salva central atual
-	persistence.SaveCentral(central);
+	// salva cliente atual
+	persistence.SaveClients(service.ListarChamados().Select(c => c.Solicitante).Distinct().ToList());
 }
 else if (role == "1")
 {
-	Console.WriteLine($"Código administrativo padrão (guarde): {adminCode}");
-	Console.Write("Digite o código para entrar na área administrativa: ");
+	ColorConsole.PrintCorporation("╔════════════════════════════════════════════════════════════╗");
+	ColorConsole.PrintCorporation("║              ÁREA ADMINISTRATIVA RESTRITA                 ║");
+	ColorConsole.PrintCorporation("╚════════════════════════════════════════════════════════════╝");
+	Console.WriteLine();
+	ColorConsole.WriteInfo($"Código administrativo padrão (guarde): ");
+	ColorConsole.PrintInfo(adminCode);
+	ColorConsole.WriteCorporation("Digite o código para entrar na área administrativa: ");
 	var input = Console.ReadLine() ?? string.Empty;
 
 	if (input != adminCode)
 	{
-		Console.WriteLine("Código inválido. Saindo.");
+		ColorConsole.PrintError("✗ Código inválido. Saindo.");
 		return;
 	}
 
-	Console.WriteLine("Acesso administrativo concedido.");
+	ColorConsole.PrintSuccess("✓ Acesso administrativo concedido.");
 	bool running = true;
 	while (running)
 	{
-		Console.WriteLine("Admin Menu: 1) Cadastrar criminoso 2) Cadastrar operação 3) Cadastro apoio governamental 4) Listar tudo 0) Sair");
+		Console.WriteLine();
+		ColorConsole.PrintMenu("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		ColorConsole.PrintMenu("MENU ADMINISTRATIVO");
+		ColorConsole.PrintMenu("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		Console.Write("  ");
+		ColorConsole.WriteCorporation("1) Cadastrar criminoso");
+		Console.Write("      ");
+		ColorConsole.WriteCorporation("2) Cadastrar operação");
+		Console.WriteLine();
+		Console.Write("  ");
+		ColorConsole.WriteCorporation("3) Cadastro apoio governamental");
+		Console.Write("  ");
+		ColorConsole.WriteMenu("4) Listar tudo");
+		Console.Write("  ");
+		ColorConsole.WriteMenu("0) Sair");
+		Console.WriteLine();
+		ColorConsole.PrintMenu("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+		ColorConsole.WriteMenu("Escolha: ");
 		var opt = Console.ReadLine();
 		switch (opt)
 		{
 			case "1":
-				Console.Write("Nome do criminoso: ");
+				Console.WriteLine();
+				ColorConsole.PrintCorporation("═ CADASTRO DE CRIMINOSO ═");
+				ColorConsole.WriteCorporation("Nome do criminoso: ");
 				var nome = Console.ReadLine() ?? string.Empty;
-				Console.Write("Descrição / observações: ");
+				ColorConsole.WriteCorporation("Descrição / observações: ");
 				var desc = Console.ReadLine() ?? string.Empty;
-				central.Criminosos.Add(new Criminoso { Nome = nome, Detalhes = desc, DataRegistro = DateTime.UtcNow, Origem = "Oficial" });
-				persistence.SaveCentral(central);
-				Console.WriteLine("Criminoso registrado.");
+				criminosos.Add(new Criminoso { Nome = nome, Detalhes = desc, DataRegistro = DateTime.UtcNow, Origem = "Oficial" });
+				persistence.SaveCriminosos(criminosos);
+				ColorConsole.PrintSuccess("✓ Criminoso registrado.");
 				break;
 			case "2":
-				Console.Write("Nome da operação: ");
+				Console.WriteLine();
+				ColorConsole.PrintCorporation("═ CADASTRO DE OPERAÇÃO ═");
+				ColorConsole.WriteCorporation("Nome da operação: ");
 				var op = Console.ReadLine() ?? string.Empty;
-				Console.Write("Descrição: ");
+				ColorConsole.WriteCorporation("Descrição: ");
 				var dop = Console.ReadLine() ?? string.Empty;
-				central.Operacoes.Add(new Operacao { Titulo = op, Descricao = dop, DataAgendada = DateTime.UtcNow, Origem = "Oficial" });
-				persistence.SaveCentral(central);
-				Console.WriteLine("Operação registrada.");
+				operacoes.Add(new Operacao { Titulo = op, Descricao = dop, DataAgendada = DateTime.UtcNow, Origem = "Oficial" });
+				persistence.SaveOperacoes(operacoes);
+				ColorConsole.PrintSuccess("✓ Operação registrada.");
 				break;
 			case "3":
-				Console.Write("Descrição do apoio: ");
+				Console.WriteLine();
+				ColorConsole.PrintCorporation("═ CADASTRO DE APOIO GOVERNAMENTAL ═");
+				ColorConsole.WriteCorporation("Descrição do apoio: ");
 				var sup = Console.ReadLine() ?? string.Empty;
-				central.Supports.Add(new GovernmentSupport { Descricao = sup, Data = DateTime.UtcNow, Origem = "Oficial" });
-				persistence.SaveCentral(central);
-				Console.WriteLine("Apoio registrado.");
+				supports.Add(new GovernmentSupport { Descricao = sup, Data = DateTime.UtcNow, Origem = "Oficial" });
+				persistence.SaveSupports(supports);
+				ColorConsole.PrintSuccess("✓ Apoio registrado.");
 				break;
 			case "4":
-				Console.WriteLine("-- Criminosos --");
-				foreach (var c in central.Criminosos) Console.WriteLine($"{c.Nome} - {c.Detalhes} - {c.DataRegistro}");
-				Console.WriteLine("-- Operações --");
-				foreach (var o in central.Operacoes) Console.WriteLine($"{o.Titulo} - {o.Descricao} - {o.DataAgendada}");
-				Console.WriteLine("-- Apoios Governamentais --");
-				foreach (var s in central.Supports) Console.WriteLine($"{s.Descricao} - {s.Data}");
+				Console.WriteLine();
+				ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════");
+				ColorConsole.PrintCorporation("■ CRIMINOSOS CADASTRADOS");
+				ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════");
+				if (criminosos.Count == 0)
+					ColorConsole.PrintInfo("  (Nenhum criminoso registrado)");
+				else
+					foreach (var c in criminosos) 
+						ColorConsole.PrintCorporation($"  ► {c.Nome} - {c.Detalhes} ({c.DataRegistro:dd/MM/yyyy HH:mm})");
+				
+				Console.WriteLine();
+				ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════");
+				ColorConsole.PrintCorporation("■ OPERAÇÕES CADASTRADAS");
+				ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════");
+				if (operacoes.Count == 0)
+					ColorConsole.PrintInfo("  (Nenhuma operação registrada)");
+				else
+					foreach (var o in operacoes) 
+						ColorConsole.PrintCorporation($"  ► {o.Titulo} - {o.Descricao} ({o.DataAgendada:dd/MM/yyyy HH:mm})");
+				
+				Console.WriteLine();
+				ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════");
+				ColorConsole.PrintCorporation("■ APOIOS GOVERNAMENTAIS");
+				ColorConsole.PrintMenu("═══════════════════════════════════════════════════════════");
+				if (supports.Count == 0)
+					ColorConsole.PrintInfo("  (Nenhum apoio registrado)");
+				else
+					foreach (var s in supports) 
+						ColorConsole.PrintCorporation($"  ► {s.Descricao} ({s.Data:dd/MM/yyyy HH:mm})");
 				break;
 			case "0":
-				running = false; break;
+				running = false; 
+				ColorConsole.PrintSuccess("✓ Encerrando sessão...");
+				break;
 			default:
-				Console.WriteLine("Opção inválida."); break;
+				ColorConsole.PrintError("✗ Opção inválida."); 
+				break;
 		}
 	}
 }
 else
 {
-	Console.WriteLine("Opção inválida. Encerrando.");
+	ColorConsole.PrintError("✗ Opção inválida. Encerrando.");
 }
 
 string AnalyzeIncident(string texto)
@@ -188,7 +256,7 @@ void PlayAlertForUnit(string unidade)
 		var lower = (unidade ?? string.Empty).ToLowerInvariant();
 		string filename = null;
 
-		if (lower.Contains("ambul")) filename = "fire rescue.mp3";
+		if (lower.Contains("ambul")) filename = "Ambulance.mp3";
 		else if (lower.Contains("bombeir")) filename = "fire rescue.mp3";
 		else if (lower.Contains("pol")) filename = "police_siren.mp3";
 
@@ -208,7 +276,7 @@ void PlayAlertForUnit(string unidade)
 			return;
 		}
 
-		Console.WriteLine($"CIA Radio: {filename}");
+		Console.WriteLine("\t\nEstamos enviando a nossa unidade mais próxima.");
 		
 		// Detecta o sistema operacional e usa o player apropriado
 		ProcessStartInfo psi;

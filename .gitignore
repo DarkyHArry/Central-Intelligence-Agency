@@ -1,0 +1,44 @@
+# Arquivos de Build
+bin/
+obj/
+*.dll
+*.exe
+*.o
+*.so
+
+# Arquivos de Projeto Visual Studio
+.vs/
+.vscode/
+*.sln.docstates
+
+# Arquivos de Usuário
+*.user
+*.userosscache
+*.suo
+
+# Arquivos de IDE
+.idea/
+.DS_Store
+*.swp
+*.swo
+
+# Arquivos Temporários
+*.tmp
+*~
+*.bak
+exit
+
+# Arquivos de Log
+*.log
+
+# Arquivos NuGet
+*.nupkg
+*.snupkg
+
+# Diretórios de Teste
+TestResults/
+coverage/
+
+# Arquivos de Configuração Local
+local.settings.json
+appsettings.local.json
