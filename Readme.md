@@ -1,5 +1,8 @@
 # Projeto CIA.HelpDesk
 
+**Aluno: Esmael Victor R. Silva**
+**Aluno: Johny Rodrigues De Assis**
+
 Este repositório contém o código-fonte de um sistema de Help Desk desenvolvido em C#, focado na aplicação dos princípios SOLID para garantir um design de software robusto, manutenível e extensível.
 
 ## Diagrama de Classes UML
