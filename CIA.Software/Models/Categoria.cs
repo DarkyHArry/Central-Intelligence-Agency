@@ -5,8 +5,6 @@ namespace CIA.HelpDesk.Models
         Geral,
         Segurança,
         TI,
-        Saúde,
-        Transporte,
-        Outro
+        Transporte
     }
 }

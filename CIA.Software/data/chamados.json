@@ -1,97 +1,28 @@
 [
   {
     "Id": 1,
-    "Descricao": "Um homem entrou em minha residencia e assassinou minha mulher!",
-    "Categoria": 1,
-    "Status": "Aberto",
+    "Descricao": "My CIA Software mobile with error build (kernel load ).",
+    "Categoria": 0,
+    "Status": "Em Andamento",
     "Solicitante": {
       "Id": 1,
-      "Nome": "Esmael Victor Renovato Da Silva",
-      "Tipo": "Civil",
-      "TipoSetor": "Civil",
+      "Nome": "Esmael  Victor Renovado Da Silva",
+      "Tipo": "Funcion\u00E1rio",
       "Documento": "13994343496",
-      "DocumentoIdentificacao": "13994343496",
-      "Endereco": "Alameda 17, California"
+      "Endereco": "NYPD - Police Department"
     },
-    "Endereco": "Alameda 17, California",
-    "AgenteResponsavel": null,
-    "Historicos": [],
-    "EstaEncerrado": false
-  },
-  {
-    "Id": 2,
-    "Descricao": "Fumaca alta e fogo espalhado por uma casa proxima a minha!",
-    "Categoria": 1,
-    "Status": "Aberto",
-    "Solicitante": {
-      "Id": 2,
-      "Nome": "Julliana Stuartt Vergara",
-      "Tipo": "Civil",
-      "TipoSetor": "Civil",
-      "Documento": "23478956709",
-      "DocumentoIdentificacao": "23478956709",
-      "Endereco": "Condado Dos Anjos, New England 12"
+    "Endereco": "NYPD - Police Department",
+    "AgenteResponsavel": {
+      "Id": 1,
+      "Nome": "T\u00E9cnico de Plant\u00E3o",
+      "Codinome": "TECH_01"
     },
-    "Endereco": "Condado Dos Anjos, New England 12",
-    "AgenteResponsavel": null,
-    "Historicos": [],
-    "EstaEncerrado": false
-  },
-  {
-    "Id": 3,
-    "Descricao": "Minha amiga foi esfaqueada e está cheia de sangue, esta quase morrendo me ajudem!",
-    "Categoria": 1,
-    "Status": "Aberto",
-    "Solicitante": {
-      "Id": 3,
-      "Nome": "Megan Brown",
-      "Tipo": "Civil",
-      "TipoSetor": "Civil",
-      "Documento": "23568790000",
-      "DocumentoIdentificacao": "23568790000",
-      "Endereco": "Central Park"
-    },
-    "Endereco": "Central Park",
-    "AgenteResponsavel": null,
-    "Historicos": [],
-    "EstaEncerrado": false
-  },
-  {
-    "Id": 4,
-    "Descricao": "Um homem me roubou e preciso de ajuda, perdi meu carro!",
-    "Categoria": 1,
-    "Status": "Aberto",
-    "Solicitante": {
-      "Id": 4,
-      "Nome": "Angeline Marcos White",
-      "Tipo": "Civil",
-      "TipoSetor": "Civil",
-      "Documento": "32243311109",
-      "DocumentoIdentificacao": "32243311109",
-      "Endereco": "Central City, 12"
-    },
-    "Endereco": "Central City, 12",
-    "AgenteResponsavel": null,
-    "Historicos": [],
-    "EstaEncerrado": false
-  },
-  {
-    "Id": 5,
-    "Descricao": "Meu deus! um homem esta fazendo uma mulher de escudo e matou uma garotinha!",
-    "Categoria": 1,
-    "Status": "Aberto",
-    "Solicitante": {
-      "Id": 5,
-      "Nome": "Julian Rogers",
-      "Tipo": "Civil",
-      "TipoSetor": "Civil",
-      "Documento": "87667899909",
-      "DocumentoIdentificacao": "87667899909",
-      "Endereco": "Aeroporto Santa Monica, porta B"
-    },
-    "Endereco": "Aeroporto Santa Monica, porta B",
-    "AgenteResponsavel": null,
-    "Historicos": [],
+    "Historicos": [
+      {
+        "Timestamp": "2026-02-07T00:53:17.898811Z",
+        "Evento": "Agente TECH_01 assumiu o caso."
+      }
+    ],
     "EstaEncerrado": false
   }
 ]

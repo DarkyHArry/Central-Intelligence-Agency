@@ -5,13 +5,10 @@ namespace CIA.HelpDesk.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
-        public string Tipo { get; set; } // "Civil" ou "Oficial"
-        public string TipoSetor { get; set; } // Compatibilidade com dados antigos
-        public string Documento { get; set; } // CPF
-        public string DocumentoIdentificacao { get; set; } // Compatibilidade com dados antigos
-        public string Endereco { get; set; } // Campo para armazenar endereço
+        public string Tipo { get; set; }
+        public string Documento { get; set; }
+        public string Endereco { get; set; }
 
-        
         public Cliente() { }
 
         public Cliente(int id, string nome, string tipo, string documento, string endereco = "")
@@ -19,9 +16,7 @@ namespace CIA.HelpDesk.Models
             Id = id;
             Nome = nome;
             Tipo = tipo;
-            TipoSetor = tipo; // Mantém compatibilidade
             Documento = documento;
-            DocumentoIdentificacao = documento; // Mantém compatibilidade
             Endereco = endereco ?? "";
         }
     }

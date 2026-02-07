@@ -17,16 +17,5 @@ namespace CIA.HelpDesk.Models
         }
     }
 
-    // Tecnico é o agente que pode ser atribuído a chamados
-    public class Tecnico : Usuario
-    {
-        public string Codinome { get; set; }
-        public Tecnico() { }
-
-        public Tecnico(int id, string nome, string codinome, string documento = null)
-            : base(id, nome, documento)
-        {
-            Codinome = codinome;
-        }
-    }
+    // Outros tipos de usuário estendem `Usuario` em arquivos separados.
 }
